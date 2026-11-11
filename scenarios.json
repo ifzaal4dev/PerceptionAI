@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "sender": "Alex",
+    "conversation": "Alex and Jordan are classmates working on a group project.\nAlex: Did you finish your part of the project?\nJordan: I'll finish it tonight.\nAlex: Sure, that's fine."
+  },
+  {
+    "id": 2,
+    "sender": "Maya",
+    "conversation": "Maya and Sam are coworkers.\nMaya: Are you coming to the meeting?\nSam: I think so.\nMaya: Okay, if you say so."
+  },
+  {
+    "id": 3,
+    "sender": "Taylor",
+    "conversation": "Chris and Taylor are classmates preparing a presentation.\nChris: I changed the slides a little.\nTaylor: I saw.\nChris: Hope that's okay.\nTaylor: It's your section."
+  },
+  {
+    "id": 4,
+    "sender": "Morgan",
+    "conversation": "Riley and Morgan are friends meeting for lunch.\nRiley: I might be a few minutes late.\nMorgan: Again?\nRiley: Probably only five minutes.\nMorgan: No worries."
+  },
+  {
+    "id": 5,
+    "sender": "Casey",
+    "conversation": "Jamie and Casey are teammates on a project.\nJamie: Do you want me to redo this section?\nCasey: You can if you want.\nJamie: Is something wrong with it?\nCasey: I didn't say that."
+  },
+  {
+    "id": 6,
+    "sender": "Drew",
+    "conversation": "Sam and Drew are roommates.\nSam: I used some of your milk this morning.\nDrew: Okay.\nSam: I'll replace it.\nDrew: Sure."
+  },
+  {
+    "id": 7,
+    "sender": "Jordan",
+    "conversation": "Priya and Jordan are coworkers.\nPriya: I sent the report a day late.\nJordan: I noticed.\nPriya: Sorry about that.\nJordan: It happens."
+  },
+  {
+    "id": 8,
+    "sender": "Ash",
+    "conversation": "Lee and Ash are friends.\nLee: I can't make it to dinner tonight.\nAsh: Oh.\nLee: Next week?\nAsh: We'll see."
+  },
+  {
+    "id": 9,
+    "sender": "Robin",
+    "conversation": "Kim and Robin are classmates sharing notes.\nKim: I added my notes to the doc.\nRobin: Thanks.\nKim: Let me know if you want changes.\nRobin: I'll fix them later."
+  },
+  {
+    "id": 10,
+    "sender": "Quinn",
+    "conversation": "Taylor and Quinn are roommates.\nTaylor: I'm having a few people over Friday.\nQuinn: Okay.\nTaylor: Is that alright?\nQuinn: It's your place too."
+  },
+  {
+    "id": 11,
+    "sender": "Avery",
+    "conversation": "Sam and Avery are coworkers.\nSam: I took the lead on the client call.\nAvery: I saw.\nSam: Hope that was okay.\nAvery: Interesting choice."
+  },
+  {
+    "id": 12,
+    "sender": "Casey",
+    "conversation": "Jordan and Casey are friends.\nJordan: I can't help you move on Saturday after all.\nCasey: Ok.\nJordan: Sorry!\nCasey: Don't worry about it."
+  },
+  {
+    "id": 13,
+    "sender": "Alex",
+    "conversation": "Morgan and Alex are classmates working on a presentation.\nMorgan: I changed the topic of our presentation.\nAlex: Okay.\nMorgan: Is that fine?\nAlex: Whatever works."
+  },
+  {
+    "id": 14,
+    "sender": "Pat",
+    "conversation": "Drew and Pat are coworkers.\nDrew: Can you review my code today?\nPat: I'll try.\nDrew: It's kind of urgent.\nPat: Noted."
+  },
+  {
+    "id": 15,
+    "sender": "Jamie",
+    "conversation": "Riley and Jamie are roommates.\nRiley: I'll do the dishes tomorrow.\nJamie: Okay.\nRiley: Busy night.\nJamie: Must be nice."
+  },
+  {
+    "id": 16,
+    "sender": "Lee",
+    "conversation": "Avery and Lee are friends.\nAvery: Did you see my post?\nLee: Yeah.\nAvery: What did you think?\nLee: It was very you."
+  },
+  {
+    "id": 17,
+    "sender": "Kim",
+    "conversation": "Pat and Kim are coworkers.\nPat: I'll handle the slides for Monday.\nKim: Great.\nPat: I'll send them Sunday night.\nKim: Sunday night. Okay."
+  },
+  {
+    "id": 18,
+    "sender": "Sam",
+    "conversation": "Quinn and Sam are classmates.\nQuinn: I got an A on the paper.\nSam: Nice.\nQuinn: Didn't even study much.\nSam: Good for you."
+  },
+  {
+    "id": 19,
+    "sender": "Drew",
+    "conversation": "Ash and Drew are friends planning a trip.\nAsh: I invited Robin on the trip too.\nDrew: Oh, okay.\nAsh: That's fine, right?\nDrew: The more the merrier."
+  },
+  {
+    "id": 20,
+    "sender": "Priya",
+    "conversation": "Jordan and Priya are lab partners.\nJordan: I finished the lab report without you.\nPriya: Oh.\nJordan: Figured it'd be faster.\nPriya: Thanks, I guess."
+  }
+]

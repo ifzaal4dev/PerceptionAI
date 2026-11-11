@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+
+# Runner temp and lock files
+*.tmp
+.lock
+
+# Never commit keys
+.env
+
+# Formal run outputs: decide with the team where the dataset lives before committing
+runs/
