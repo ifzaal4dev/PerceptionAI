@@ -1,0 +1,28 @@
+Kappa report (main) 2026-11-21T04:10:25.552427+00:00
+R1: 50 coded, 0 uncodable, 0 invalid, 1 Excel-damaged item IDs restored by position
+R2: 51 coded, 0 uncodable, 0 invalid
+R3: 55 coded, 0 uncodable, 0 invalid
+R1+R2: 25 items coded by both (min 25: met, max 50; first 25 in order: yes)
+  main_reading           kappa  0.449  agreement  68.0%  n 25
+  mentions_alternative   kappa  0.561  agreement  80.0%  n 25
+  certainty              kappa  0.746  agreement  88.0%  n 25
+  no_clear_preference    kappa  0.694  agreement  88.0%  n 25
+R2+R3: 25 items coded by both (min 25: met, max 50; first 25 in order: yes)
+  main_reading           kappa  0.847  agreement  92.0%  n 25
+  mentions_alternative   kappa  0.532  agreement  80.0%  n 25
+  certainty              kappa  0.662  agreement  84.0%  n 25
+  no_clear_preference    kappa  0.627  agreement  92.0%  n 25
+R1+R3: 25 items coded by both (min 25: met, max 50; first 25 in order: yes)
+  main_reading           kappa  0.788  agreement  88.0%  n 25
+  mentions_alternative   kappa  0.481  agreement  80.0%  n 25
+  certainty              kappa  0.449  agreement  80.0%  n 25
+  no_clear_preference    kappa  0.565  agreement  84.0%  n 25
+Pooled across pairs (pairs of labels concatenated):
+  main_reading           kappa  0.692  agreement  82.7%  n 75
+    first rater \ second rater: negative->negative:28,neutral:2,positive:0 | neutral->negative:4,neutral:32,positive:1 | positive->negative:1,neutral:5,positive:2
+  mentions_alternative   kappa  0.524  agreement  80.0%  n 75
+    first rater \ second rater: yes->yes:45,no:8 | no->yes:7,no:15
+  certainty              kappa  0.640  agreement  84.0%  n 75
+    first rater \ second rater: confident->confident:18,hedged:11 | hedged->confident:1,hedged:45
+  no_clear_preference    kappa  0.639  agreement  88.0%  n 75
+    first rater \ second rater: yes->yes:11,no:8 | no->yes:1,no:55

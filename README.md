@@ -1,14 +1,59 @@
-# PerceptionAI · first ARC run
+# PerceptionAI: Did They Really Mean That?
 
-Use Python 3.9+ and open a terminal in this extracted folder. The starter uses Python's standard library. On Windows use `py`. On macOS or Linux use `python3`.
+**How AI interpretations shape perceptions of ambiguous messages.** Undergraduate research, Department of Computer Science, Virginia Tech.
 
-1. Run `py study0.py plan`. This overwrites only the generated plan CSV. It makes no network requests. Check the 20 fictional conversations in scenarios.json against the candidate table in instrument 3a. Each prompt contains the conversation and one question. The instrument's suggested interpretations are excluded from the model input.
-2. At https://llm.arc.vt.edu sign in to your own VT account. Open your profile, Settings, Account, API keys. Generate your personal key. Enter it only in the local hidden terminal prompt. The runner also supports the ARC_API_KEY environment variable.
-3. Run `py study0.py smoke`. This requests one response for each model and framing on scenario 1. Use one terminal at a time. A run folder is determined by the exact prompts, endpoint, models and settings. Running the same command again skips saved successes. If a call fails, the script records the failed attempt and stops. A timeout can mean the server generated a response that was never received. For a 401/403, check the key and account. For a 429, wait the specified retry time if provided. If a model is missing or the output is truncated, document it and review model choice or settings before running the experiment.
-4. Inspect one JSON per cell. Check the final answer is present, the complete raw response is saved, and the request contains one independent user message. Run smoke a second time to check for six skips. Treat these as setup outputs.
-5. Before running the full experiment, reconcile any prior logs with the team, freeze the models and exact prompts/settings, and agree on the two independent coders' instructions. This starter deliberately executes only the six-call setup. The CSV describes the complete 1,200-call design. Keep exploratory work separate from the final dataset.
+Ifzaal Ahamed Imdad, Vikas Chowdary Meka, Vishal Meka. Advisor: Dr. Sehrish Basir Nizamani.
+Presented at the VTURCS Research Symposium, Dec 1, 2026 ([poster PDF](poster/PerceptionAI_poster.pdf), [abstract](poster/abstract.txt)).
 
-Source of scenario text: Phase 1 Pilot Survey, IRB 26-1078, candidate scenarios table. Source of trial counts and framings: PerceptionAI Part 2 assignment. Model IDs come from the team's pilot. The specific question forms, temperature 0.7, top_p 1.0, and output limit of 2,048 are starter choices for testing. Server defaults and model revisions may change. Log any settings or revisions available before a formal run. This package contains only fictional inputs for the model study. Human responses belong in the PI's VT systems.
+## The study
+
+People ask AI chatbots what an unclear text message meant. This repo holds Part 2 of the project (the model study): does the *wording* of that question change the answer?
+
+- 20 fictional conversations (`scenarios.json`), each ending in a message that can be read as sincere or passive-aggressive.
+- 3 questions per conversation: neutral ("What did {sender} mean by the last message?"), negatively leading ("Is {sender} being passive-aggressive...?") and positively leading ("Is {sender} being sincere...?").
+- 2 models on the VT ARC LLM API (gpt-oss-120b, DeepSeek-V4.1-Flash), 10 repeats each: 1,200 answers.
+- Every answer coded on four fields (`codebook_v0.md`) by a model coder (GLM-5.3) and, for a 150-answer sample, by pairs of blinded human coders.
+
+Part 1 (a human survey, VT IRB #26-1078) runs separately; only its aggregate pilot summary is here. All design and analysis choices, with dates, are in `decisions.md`.
+
+## Results (descriptive only)
+
+| Model | Question | n | % negative | % hedged | % mention other reading |
+|---|---|---|---|---|---|
+| gpt-oss-120b | Neutral | 200 | 26.5 | 2.5 | 15.0 |
+| gpt-oss-120b | Passive-aggressive? | 200 | 47.5 | 89.5 | 99.0 |
+| gpt-oss-120b | Sincere? | 200 | 60.0 | 79.0 | 93.5 |
+| DeepSeek-V4.1-Flash | Neutral | 199 | 37.2 | 55.8 | 42.7 |
+| DeepSeek-V4.1-Flash | Passive-aggressive? | 197 | 53.3 | 94.4 | 96.4 |
+| DeepSeek-V4.1-Flash | Sincere? | 198 | 51.0 | 94.9 | 93.9 |
+
+Model-coder labels; 1,194 of 1,200 answers coded (6 DeepSeek answers failed in both coding passes). Both leading questions raised negative readings, including the "sincere?" one. Agreement (Cohen's kappa, main reading): model coder vs. humans 0.72 (n 154), human vs. human 0.69 (3 pairs x 25 = 75). Full output: `results/judge_report.txt`, `results/judge_table.csv`, `coding/kappa_main.txt`.
+
+## Repo layout
+
+| Path | What it is |
+|---|---|
+| `study0.py` | Runner: plan, smoke, run, verify, sample, export, kappa, judge, judge-retry, judge-report |
+| `tests/` | Offline tests against a mock server (no ARC key needed) |
+| `scenarios.json`, `planned_trials.csv` | Inputs and the 1,200-trial design |
+| `codebook_v0.md`, `coding_plan.csv`, `coding/` | Codebook, the fixed coding sample, blinded coder sheets and kappa reports |
+| `results/` | Aggregate outputs: model-coder tables, pilot summary |
+| `poster/` | Poster build script, chart script, final PDF/PPTX, abstract |
+| `pilot_summary.py` | Aggregates the Part 1 pilot export per scenario (no individual responses written) |
+| `qualtrics_build_spec.md` | Build spec for the Part 1 survey |
+| `smoke_runs/` | Setup test calls only, not part of the dataset |
+
+`runs/` (raw model answers and model-coder records, about 63 MB) is not committed yet; where the dataset is archived is a team/PI decision. `poster/make_charts.py` needs `runs/judge/ea34f421e7a9/judge_labels.csv`, which `py study0.py judge-report` writes.
+
+## Reproducing
+
+Python 3.9+ (`py` on Windows, `python3` elsewhere). The runner uses only the standard library; the poster and pilot scripts also need `python-pptx`, `matplotlib`, `openpyxl`.
+
+1. `py study0.py plan` rebuilds `planned_trials.csv` (no network).
+2. Get a personal key at https://llm.arc.vt.edu (Settings, Account, API keys). Enter it at the hidden prompt or set `ARC_API_KEY`. Never commit or paste it anywhere.
+3. `py study0.py smoke`, then `py study0.py run` and `py study0.py verify` (details below).
+4. Coding: `sample`, `export`, then `kappa`. Model coder: `judge`, `judge-retry`, `judge-report`.
+5. Poster: `py poster/make_charts.py`, then from `poster/`: `python build_poster.py template_cs4974.pptx PerceptionAI_poster_final.pptx`.
 
 ARC service reference: https://docs.arc.vt.edu/ai/011_llm_api_arc_vt_edu.html
 
@@ -24,4 +69,17 @@ Only start once decisions.md sections 2–4 are frozen (PI sign-off).
 
 ## Tests
 
-`py -m unittest discover -s tests -v` runs 15 offline tests against a local mock server (about a minute; no ARC calls, no key needed).
+`py -m unittest discover -s tests -v` runs 33 offline tests against a local mock server (about 7 minutes; no ARC calls, no key needed).
+
+## Coding (agreed with the PI Nov 11)
+
+- `py study0.py sample` writes `coding_plan.csv`: the fixed-rule sample of 150 main items + 20 practice items. It was generated before any formal output and must not change; the command refuses if the file differs. **Raters must not open it**: it maps item IDs to model and question.
+- `py study0.py export` (after the run) writes blinded sheets to `coding/`: `R1_main.csv`, `R2_main.csv`, `R3_main.csv` (100 items each, two pairs per rater) and `R*_practice.csv` (20 each). Sheets show only an item ID, the conversation and the answer. It never overwrites a sheet. Unavailable trials (final failures) are left out and listed in `coding/export_report.txt`.
+- Each pair codes items from the top of its list: minimum 25, maximum 50 per pair. Fill `main_reading`, `mentions_alternative`, `certainty`, `no_clear_preference` with the exact words in `codebook_v0.md`; write `UNCODABLE` in `notes` for refusals. Excel is fine: save as CSV (either "CSV UTF-8" or plain CSV).
+- `py study0.py kappa --practice` after the practice round; `py study0.py kappa` after main coding. Writes `coding/kappa_*.txt` with κ, raw agreement and confusion tables per pair and pooled.
+
+## Model coder (GLM-5.3)
+
+- `py study0.py judge` codes all 1,200 answers with a frozen prompt (temperature 0, never tuned on human labels) into `runs/judge/<hash>/`.
+- `py study0.py judge-retry` re-codes only the main pass's final failures, streamed with a larger token budget, into a separate folder (rule fixed before any retry output; see decisions.md E3).
+- `py study0.py judge-report` writes `results/judge_report.txt` and `results/judge_table.csv`: model-coder vs. human kappa and the model x framing table, with per-cell counts of items from the retry and items never coded. Human coders should not run it until their sheets are done.

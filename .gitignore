@@ -11,3 +11,10 @@ __pycache__/
 
 # Formal run outputs: decide with the team where the dataset lives before committing
 runs/
+
+# Office lock files and working copies
+~$*
+poster/PerceptionAI_poster_DRAFT.pptx
+
+# Duplicate of coding/R1_main.csv (R1's saved-as copy)
+coding/R1_main_updated.csv
